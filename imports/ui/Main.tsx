@@ -1,14 +1,14 @@
 import React from "react";
-import { server } from "../api/server";
+import { client } from "../api/client";
 import { useNavigate } from "react-router-dom";
 
 export const Main = () => {
   const navigate = useNavigate();
 
-  const { data: rooms } = server.chat.rooms.usePublication();
+  const { data: rooms } = client.chat.rooms.usePublication();
 
   const createChatRoom = async () => {
-    const room = await server.chat.createTheRoom();
+    const room = await client.chat.createTheRoom();
     navigate(`/chat/${room}`);
   };
 

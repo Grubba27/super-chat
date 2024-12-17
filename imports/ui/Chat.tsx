@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { server } from "../api/server";
+import { client } from "../api/client";
 import { useNavigate, useParams } from "react-router-dom";
 
 export const Chat = () => {
@@ -7,7 +7,7 @@ export const Chat = () => {
   const navigate = useNavigate();
   const {
     data: [chatRoom],
-  } = server.chat.room.usePublication(chatId as string);
+  } = client.chat.room.usePublication(chatId as string);
 
   const [state, dispatch] = useReducer(
     (
@@ -30,7 +30,7 @@ export const Chat = () => {
       alert("Please fill in both fields");
       return;
     }
-    await server.chat.sendMessage({
+    await client.chat.sendMessage({
       chatId: chatId as string,
       message: state.message,
       user: state.who,
